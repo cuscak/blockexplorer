@@ -1,3 +1,14 @@
+# Notes
+
+This is initial solution for Alchemy week 3 project.
+Focus was on learning about alchemy sdk so solution has no UI whatsoever and use of react is probably not correct.
+
+Solution has 3 pages, one for blocks and transactions, one for getting balance and one for NFTs.
+
+Blocks page (or home/root page) has a react state issue.
+If useEffect() is set to update only once, previous block are not populated with values (zeros for every value except block hash). If useEffect() is not limited to run only once, values are updated under users hand.
+
+
 # Ethereum Block Explorer
 
 The lessons this week covered the Ethereum JSON-RPC API and the `ethers.js` library giving us the ability to query the Ethereum blockchain and make transactions!
