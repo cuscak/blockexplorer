@@ -1,5 +1,9 @@
 import { Alchemy, Network } from 'alchemy-sdk';
-import { useEffect, useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Blocks from './components/Blocks';
+import Balance from './components/Balance';
+import Nft from './components/Nft';
+
 
 import './App.css';
 
@@ -11,26 +15,35 @@ const settings = {
   network: Network.ETH_MAINNET,
 };
 
-
-// In this week's lessons we used ethers.js. Here we are using the
-// Alchemy SDK is an umbrella library with several different packages.
-//
-// You can read more about the packages here:
-//   https://docs.alchemy.com/reference/alchemy-sdk-api-surface-overview#api-surface
 const alchemy = new Alchemy(settings);
 
 function App() {
-  const [blockNumber, setBlockNumber] = useState();
 
-  useEffect(() => {
-    async function getBlockNumber() {
-      setBlockNumber(await alchemy.core.getBlockNumber());
-    }
-
-    getBlockNumber();
-  });
-
-  return <div className="App">Block Number: {blockNumber}</div>;
+  return (
+    <>
+      <div>
+        <p>Navigation:</p>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/balance">Check wallet balance</Link>
+            </li>
+            <li>
+              <Link to="/nft">NFTs</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <Routes>
+        <Route path="/" element={<Blocks alchemy={alchemy} />} />
+        <Route path="/balance" element={<Balance alchemy={alchemy}/>} />
+        <Route path="/nft" element={<Nft alchemy={alchemy}/>} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
